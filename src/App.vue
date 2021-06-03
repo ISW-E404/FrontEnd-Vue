@@ -27,6 +27,9 @@
           <router-link class="white--text" to="/myworkplaces/">Mis Oficinas</router-link>
         </v-btn>
         <v-btn depressed>
+          <router-link class="white--text" to="/login">Iniciar Sesion</router-link>
+        </v-btn>
+        <v-btn depressed>
           <router-link class="white--text" to="/profile">Perfil</router-link>
         </v-btn>
       </v-toolbar-items>
