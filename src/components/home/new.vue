@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import TopValuation from "@/components/home/top-valuation";
-import Top from "@/components/home/top";
+import TopValuation from "../home/top-valuation";
+import Top from "../home/top";
 export default {
 name: "new",
   components: {

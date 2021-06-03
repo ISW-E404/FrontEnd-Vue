@@ -60,7 +60,7 @@ name: "footer",
           title: "FAQ", link:"faq"
         },
         {
-          title: "Perfil", link:"perfil"
+          title: "Profile", link:"profile"
         },
       ]
     }

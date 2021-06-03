@@ -10,8 +10,8 @@
 
 <script>
 
-import ViewUser from "@/components/home/view-user";
-import Nuevos from "@/components/home/new";
+import ViewUser from "../components/home/view-user";
+import Nuevos from "../components/home/new";
 
 export default {
   name: 'Home',

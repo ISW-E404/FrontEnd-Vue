@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import officeReservationsTable from "@/components/office-reservations-table";
+import officeReservationsTable from "../components/office-reservations-table";
 // import ReservationService from "@/services/reservation-service";
 export default {
   name: "user-reservations",
