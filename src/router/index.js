@@ -10,7 +10,16 @@ const routes = [
     name: 'Home',
     component: Home
   },
-
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../components/register')
+  },
     {
         path: '/search',
         name: 'Offices',
