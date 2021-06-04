@@ -1,10 +1,12 @@
-import axios from 'axios';
+// import axios from 'axios';
+import http from './http-common';
 
-const API_URL = 'https://localhost:5001/api/users/authenticate';
+// const API_URL = 'http://localhost:5001/api/accounts';
+
 class AuthService {
     login(user) {
-        return axios.post(API_URL, {
-            username: user.username,
+        return http.post('/accounts/authenticate', {
+            email: user.email,
             password: user.password
         })
             .then(response => {
@@ -19,11 +21,14 @@ class AuthService {
         localStorage.removeItem('user');
     }
     register(user){
-        return axios.post(API_URL + 'sign-up', {
+        return http.post( '/accounts',{
+            email:user.email,
             firstName: user.firstName,
             lastName: user.lastName,
             username: user.username,
-            password: user.password
+            password: user.password,
+            identification:user.identification,
+            PhoneNumber: user.callNumber
         });
     }
 }

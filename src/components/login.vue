@@ -13,11 +13,11 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-form @submit="handleLogin" v-model="isValid">
+        <v-form v-model="isValid" @submit.prevent="handleLogin">
           <v-card-text class="login">
             <div class="form">
               <v-text-field class="text-field"
-                            v-model="user.username"
+                            v-model="user.email"
                             :rules="emailRules"
                             label="E-mail"
               ></v-text-field>
@@ -79,7 +79,8 @@ export default {
   name: "Login",
   data() {
     return {
-      user: new User('','','',''),
+      user: new User('','','','','',''),
+      submitted: false,
       loading: false,
       message: '',
       isValid: true,
@@ -107,13 +108,15 @@ export default {
   methods: {
     handleLogin() {
       this.loading = true;
+      this.submitted = true;
       console.log('Starting Login handling');
+
       if (!this.isValid) {
         console.log('Invalid');
         this.loading = false;
         return;
       }
-      if (this.user.username && this.user.password) {
+      if (this.user.email && this.user.password) {
         this.$store.dispatch('auth/login', this.user)
             .then((user) => {
                   console.log('Logged In');

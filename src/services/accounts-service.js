@@ -1,5 +1,6 @@
 import http from './http-common';
 
+
 class AccountService {
     get() {
         return http.get(`/profile`);

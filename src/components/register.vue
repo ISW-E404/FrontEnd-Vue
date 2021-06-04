@@ -16,10 +16,15 @@
         <v-form v-model="isValid" @submit.prevent="handleRegister">
           <v-card-text class="register">
             <div class="form">
-              <v-text-field class="text-field" type="text" label="Id"
-                            v-model="user.id" required>
+<!--              <v-text-field class="text-field" type="text" label="Id"-->
+<!--                            v-model="user.id" required>-->
 
-              </v-text-field>
+<!--              </v-text-field>-->
+              <v-text-field class="text-field"
+                            v-model="user.email"
+                            :rules="emailRules"
+                            label="E-mail"
+              ></v-text-field>
             </div>
             <div class="form">
               <v-row>
@@ -36,6 +41,18 @@
                   </v-text-field>
                 </v-col>
               </v-row>
+            </div>
+            <div class="form">
+              <v-text-field class="text-field"  label="Identification" v-model="user.identification" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                            :rules="[v => !!v || 'numero identificacion es requerido']" required>
+
+              </v-text-field>
+            </div>
+            <div class="form">
+              <v-text-field class="text-field"  label="Phone Number" v-model="user.callNumber" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                            :rules="[v => !!v || 'numero telefonico es requerido']" required>
+
+              </v-text-field>
             </div>
             <div class="form">
               <v-text-field class="text-field"  label="Contraseña" v-model="user.password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -78,12 +95,14 @@
 </template>
 
 <script>
+
 import User from '../../models/user';
+
 export default {
   name: "Register",
   data () {
     return {
-      user: new User('','','',''),
+      user: new User('','','','','',''),
       submitted: false,
       successful: false,
       message: '',
@@ -107,7 +126,7 @@ export default {
   },
   computed: {
     loggedIn() {
-      return this.$store.state.auth.status.loggedIn();
+      return this.$store.state.auth.status.loggedIn;
     }
   },
   mounted() {

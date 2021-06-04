@@ -25,10 +25,14 @@
 
 
         <v-btn class="button" large color="primary" @click="navigateToEditProfile">Editar Perfil</v-btn>
+
+        <v-btn class="button" large color="error" @click="logout">LogOut</v-btn>
+
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{on, attrs}">
                 <v-btn class="button" large color="error" v-bind="attrs" v-on="on">Deactivate Account</v-btn>
               </template>
+
               <v-card>
                 <v-card-title>
                   <span class="headline">{{ formTitle }}</span>
