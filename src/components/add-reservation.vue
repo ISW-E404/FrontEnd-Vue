@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ReservationsService from "@/services/reservations-service";
+import ReservationsService from "../services/reservations-service";
 
 export default {
   name: "add-reservation",
