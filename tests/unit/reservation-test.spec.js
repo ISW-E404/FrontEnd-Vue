@@ -3,8 +3,6 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import ReservationsTable from '../../src/components/reservations-table'
-import AddReservation from '../../src/components/add-reservation'
-
 
 Vue.use(Vuetify)
 const localVue = createLocalVue()
