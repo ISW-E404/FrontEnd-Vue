@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import OfficeService from "@/services/offices-service";
+import OfficeService from "../services/offices-service";
 
 export default {
   name: "add-office",
