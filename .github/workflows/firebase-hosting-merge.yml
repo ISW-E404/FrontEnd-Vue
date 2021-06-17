@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build with npm
-      - run: npm ci && npm run build
+        run: npm ci && npm run build
 
   tests:
     needs: build
