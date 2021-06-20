@@ -200,12 +200,12 @@ name: "list-offices",
       _this.page = pageIndex;
     },
     reserve() {
-      this.$router.push({name: 'add-reservation'})
+      this.$router.push({name: 'add-reservation'});
       this.$gtag.event("Rerserve-button-click", {
         'event_category': "Reserve to Offices",
         'event_label': "Reserve button in Offices cards clicked",
         'value': 1
-      })
+      });
     }
   },
   computed: {

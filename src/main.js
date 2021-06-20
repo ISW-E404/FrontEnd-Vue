@@ -6,7 +6,7 @@ import store from './store'
 import VueGtag from "vue-gtag";
 
 Vue.use(VueGtag, {
-  config: { id: "G-GJ765NKE71" }
+  config: { id: "G-LF9YDFLHL5" }
 });
 
 Vue.config.productionTip = false

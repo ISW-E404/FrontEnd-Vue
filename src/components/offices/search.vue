@@ -9,7 +9,7 @@
         hide-details
     ></v-text-field>
     <v-list tile="prueba">
-      <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link @click="trackFilterDistrictAndTrackOptionalSearchDistrict(item)">
+      <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link @click="trackFilterDistrictAndTrackOptionalSearchDistrict(item.title)">
         {{item.title}}
       </v-list-item>
     </v-list>
@@ -80,28 +80,28 @@ name: "search",
           'event_category': "Alternative search for districs",
           'event_label': "Surco button in districts filter clicked",
           'value': 1
-          })
+          });
       },
       trackSanMiguel(){
         this.$gtag.event("San Miguel-option-click", {
           'event_category': "Alternative search for districs",
           'event_label': "Magdalena button in districts filter clicked",
           'value': 1
-        })
+        });
       },
       trackMagdalena(){
         this.$gtag.event("Magdalena-option-click", {
           'event_category': "Alternative search for districs",
           'event_label': "San Miguel button in districts filter clicked",
           'value': 1
-        })
+        });
       },
       trackSanIsidro(){
         this.$gtag.event("San Isidro-option-click", {
           'event_category': "Alternative search for districs",
           'event_label': "San Isidro button in districts filter clicked",
           'value': 1
-        })
+        });
       },
       trackOptionalSearchDistrict(item){
         switch (item){
@@ -130,14 +130,14 @@ name: "search",
           'event_category': "General filters for offices",
           'event_label': "District filter button clicked",
           'value': 1
-        })
+        });
       },
       trackFilterPrices(){
         this.$gtag.event("price-filter-select", {
           'event_category': "General filters for offices",
           'event_label': "Price filter button clicked",
           'value': 1
-        })
+        });
       },
       trackFilterDistrictAndTrackOptionalSearchDistrict(item){
         this.trackOptionalSearchDistrict(item);
