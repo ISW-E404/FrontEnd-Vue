@@ -201,9 +201,9 @@ name: "list-offices",
     },
     reserve() {
       this.$router.push({name: 'add-reservation'})
-      this.$gtag.event("Surco-option-click", {
-        'event_category': "Alternative search for districs",
-        'event_label': "Surco button in districts filter clicked",
+      this.$gtag.event("Rerserve-button-click", {
+        'event_category': "Reserve to Offices",
+        'event_label': "Reserve button in Offices cards clicked",
         'value': 1
       })
     }
