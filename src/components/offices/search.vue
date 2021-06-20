@@ -26,10 +26,10 @@ name: "search",
       items: [
 
         {
-          title: "San Miguel"
+          title: "Surco"
         },
         {
-          title: "Surco"
+          title: "San Miguel"
         },
         {
           title: "Magdalena"
