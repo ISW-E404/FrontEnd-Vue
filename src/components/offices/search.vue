@@ -73,6 +73,73 @@ name: "search",
         }
       ]
     }
+  },
+  methods: {
+      trackSurco(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district Surco",
+          'value': 1
+          })
+      },
+      trackSanMiguel(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district San Miguel",
+          'value': 1
+        })
+      },
+      trackMagdalena(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district Magdalena",
+          'value': 1
+        })
+      },
+      trackSanIsidro(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district San Isidro",
+          'value': 1
+        })
+      },
+      trackOptionalSearchDistrict(item){
+        switch (item){
+          case "Surco":
+            this.trackSurco();
+            break;
+
+          case "San Miguel":
+            this.trackSanMiguel();
+            break;
+
+          case "Magdalena":
+            this.trackMagdalena();
+            break;
+
+          case "San Isidro":
+            this.trackSanIsidro();
+            break;
+
+          default:
+            break;
+        }
+      },
+      trackFilterDistrict(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district San Isidro",
+          'value': 1
+        })
+      },
+      trackFilterPrices(){
+        this.$gtag.event("district-optional-click", {
+          'event_category': "Search for places",
+          'event_label': "district San Isidro",
+          'value': 1
+        })
+      }
+
   }
 }
 </script>
