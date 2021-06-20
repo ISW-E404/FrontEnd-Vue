@@ -37,7 +37,7 @@
                 <v-btn
                     color="blue"
                     text
-                    @click="detalles"
+                    @click="reserve"
                 >
                   Reservar
                 </v-btn>
@@ -198,6 +198,9 @@ name: "list-offices",
       let _end = pageIndex * _this.pageSize;
       _this.historyList = _this.offices.slice(_start, _end);
       _this.page = pageIndex;
+    },
+    reserve() {
+      this.$router.push({name: 'add-reservation'})
     }
   },
   computed: {
