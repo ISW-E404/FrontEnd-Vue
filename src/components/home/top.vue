@@ -36,7 +36,7 @@
               <v-btn
                   color="blue"
                   text
-                  @click="detalles"
+                  @click="reserve"
               >
                 Reservar
               </v-btn>
@@ -104,6 +104,16 @@ name: "top",
       ],
     }
   },
+  methods: {
+    reserve() {
+      this.$router.push({name: 'add-reservation'});
+      this.$gtag.event("Rerserve-button-click", {
+        'event_category': "Reserve to Offices",
+        'event_label': "Reserve button in Offices cards clicked",
+        'value': 1
+      });
+    }
+  }
 }
 </script>
 
