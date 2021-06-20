@@ -38,7 +38,7 @@
                   text
                   @click="detalles"
               >
-                Detalles
+                Reservar
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn

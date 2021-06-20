@@ -25,7 +25,7 @@
                 </v-row>
               </v-card-text>
               <v-expand-transition>
-                <div v-show="show">
+                <div v-show="office.status">
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -39,7 +39,7 @@
                     text
                     @click="detalles"
                 >
-                  Detalles
+                  Reservar
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -65,6 +65,7 @@ name: "list-offices",
     return {
       page: 1,
       pageSize: 6,
+      show: false,
       offices: [
         {
           id:1,

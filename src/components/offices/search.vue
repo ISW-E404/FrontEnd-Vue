@@ -4,7 +4,7 @@
     <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Buscar distrito"
         single-line
         hide-details
     ></v-text-field>
@@ -22,19 +22,20 @@ export default {
 name: "search",
   data() {
     return{
+      search: '',
       items: [
 
         {
-          title: "distrito1"
+          title: "San Miguel"
         },
         {
-          title: "distrito1"
+          title: "Surco"
         },
         {
-          title: "distrito1"
+          title: "Magdalena"
         },
         {
-          title: "distrito1"
+          title: "San Isidro"
         },
       ]
     }
