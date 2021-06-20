@@ -17,7 +17,7 @@
     <v-card>
       <v-spacer></v-spacer>
       <v-text-field
-          v-model="search"
+          v-model="searchPrice"
           append-icon="mdi-magnify"
           label="Buscar por precio"
           single-line
@@ -41,6 +41,7 @@ name: "search",
   data() {
     return{
       search: '',
+      searchPrice:'',
       items: [
 
         {
