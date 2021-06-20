@@ -9,7 +9,7 @@
         hide-details
     ></v-text-field>
     <v-list tile="prueba">
-      <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link>
+      <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link @click="trackFilterDistrictAndTrackOptionalSearchDistrict(item)">
         {{item.title}}
       </v-list-item>
     </v-list>
@@ -24,7 +24,7 @@
           hide-details
       ></v-text-field>
       <v-list tile="prueba">
-        <v-list-item  v-for="item in itemsPrice" :key="item.title" :to="item.link" link>
+        <v-list-item  v-for="item in itemsPrice" :key="item.title" :to="item.link" link @click="trackFilterPrices">
           {{item.title}}
         </v-list-item>
       </v-list>
@@ -76,30 +76,30 @@ name: "search",
   },
   methods: {
       trackSurco(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district Surco",
+        this.$gtag.event("Surco-option-click", {
+          'event_category': "Alternative search for districs",
+          'event_label': "Surco button in districts filter clicked",
           'value': 1
           })
       },
       trackSanMiguel(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district San Miguel",
+        this.$gtag.event("San Miguel-option-click", {
+          'event_category': "Alternative search for districs",
+          'event_label': "Magdalena button in districts filter clicked",
           'value': 1
         })
       },
       trackMagdalena(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district Magdalena",
+        this.$gtag.event("Magdalena-option-click", {
+          'event_category': "Alternative search for districs",
+          'event_label': "San Miguel button in districts filter clicked",
           'value': 1
         })
       },
       trackSanIsidro(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district San Isidro",
+        this.$gtag.event("San Isidro-option-click", {
+          'event_category': "Alternative search for districs",
+          'event_label': "San Isidro button in districts filter clicked",
           'value': 1
         })
       },
@@ -126,18 +126,22 @@ name: "search",
         }
       },
       trackFilterDistrict(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district San Isidro",
+        this.$gtag.event("district-filter-select", {
+          'event_category': "General filters for offices",
+          'event_label': "District filter button clicked",
           'value': 1
         })
       },
       trackFilterPrices(){
-        this.$gtag.event("district-optional-click", {
-          'event_category': "Search for places",
-          'event_label': "district San Isidro",
+        this.$gtag.event("price-filter-select", {
+          'event_category': "General filters for offices",
+          'event_label': "Price filter button clicked",
           'value': 1
         })
+      },
+      trackFilterDistrictAndTrackOptionalSearchDistrict(item){
+        this.trackOptionalSearchDistrict(item);
+        this.trackFilterDistrict();
       }
 
   }
