@@ -60,7 +60,7 @@ describe('New.vue', () =>{
 
 
 
-        expect(button.text()).toBe('Detalles')
+        expect(button.text()).toBe('Reservar')
         expect(text.exists()).toBe(true)
 
     });
