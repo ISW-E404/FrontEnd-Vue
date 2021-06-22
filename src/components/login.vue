@@ -17,7 +17,7 @@
           <v-card-text class="login">
             <div class="form">
               <v-text-field class="text-field"
-                            v-model="user.email"
+                            v-model="user.username"
                             :rules="emailRules"
                             label="E-mail"
               ></v-text-field>
@@ -79,7 +79,7 @@ export default {
   name: "Login",
   data() {
     return {
-      user: new User('','','','','',''),
+      user: new User('',''),
       submitted: false,
       loading: false,
       message: '',
@@ -116,7 +116,7 @@ export default {
         this.loading = false;
         return;
       }
-      if (this.user.email && this.user.password) {
+      if (this.user.username && this.user.password) {
         this.$store.dispatch('auth/login', this.user)
             .then((user) => {
                   console.log('Logged In');

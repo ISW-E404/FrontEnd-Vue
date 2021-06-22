@@ -49,7 +49,7 @@
               </v-text-field>
             </div>
             <div class="form">
-              <v-text-field class="text-field"  label="Phone Number" v-model="user.callNumber" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              <v-text-field class="text-field"  label="Phone Number" v-model="user.phone" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                             :rules="[v => !!v || 'numero telefonico es requerido']" required>
 
               </v-text-field>
@@ -96,13 +96,13 @@
 
 <script>
 
-import User from '../../models/user';
+import Account from '../../models/account';
 
 export default {
   name: "Register",
   data () {
     return {
-      user: new User('','','','','',''),
+      user: new Account('','','','','',''),
       submitted: false,
       successful: false,
       message: '',
