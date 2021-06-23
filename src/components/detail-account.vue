@@ -13,13 +13,19 @@
         </v-col>
         <v-col cols="10" sm="8" class="right-banner">
           <v-card-text class="right-text" >
-            <div class="text-lg-left">Nombre: <!--{{ currentUser.firstName }} --></div>
+            <div class="text-lg-left">Nombre: {{ profile.firstName }} </div>
             <br/>
-            <div class="text-lg-left">Apellidos:<!--{{ currentUser.lastName }} --></div>
+            <div class="text-lg-left">Apellidos:{{ profile.lastName }} </div>
             <br/>
-            <div class="text-lg-left">E-mail: <!--{{ currentUser.username }} --></div>
+            <div class="text-lg-left">E-mail: {{ profile.email }}</div>
             <br/>
-            <div class="text-lg-left">Token: <!--{{ currentUser.token }}  --></div>
+            <div class="text-lg-left">Identificacion: {{ profile.identification }}</div>
+            <br/>
+            <div class="text-lg-left">Celular: {{ profile.phone }}</div>
+            <br/>
+            <div class="text-lg-left">Token:  </div>
+            <br/>
+            <div class="text-lg-left">{{ currentUser.token }}  </div>
           </v-card-text>
         </v-col>
 
@@ -81,7 +87,9 @@ export default {
         identification: '',
       },
       displayProfile: [],
-      profile: [],
+      profile: {
+
+      },
       editedIndex: 1,
       accounts: [],
     }
@@ -102,10 +110,22 @@ export default {
     if (!this.currentUser) {
       this.$router.push('/login');
     }
+    AccountService.getUserByEmail(this.currentUser.username)
+        .then(response => {
+          console.log(response.data);
+          this.profile = response.data;
+          this.displayProfile = response.data.map(this.getDisplayProfile);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
   },
+
   methods:{
-    retrieveProfile() {
-      AccountService.get()
+
+    retrieveAccount() {
+      AccountService.getUserByEmail(this.currentUser.username)
           .then(response => {
             console.log(response.data);
             this.profile = response.data;
@@ -115,6 +135,7 @@ export default {
             console.log(e);
           });
     },
+
     getDisplayProfile(account){
       return {
         firstName: account.firstName,
@@ -125,7 +146,7 @@ export default {
       };
     },
     refreshList() {
-      this.retrieveProfile();
+      this.retrieveAccount();
     },
 
     close() {
@@ -168,6 +189,7 @@ export default {
             console.log(e);
           });
     },
+
     logout() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/login');

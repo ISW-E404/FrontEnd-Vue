@@ -9,16 +9,20 @@ class OfficesService {
         return http.get(`/workspace/${id}`);
     }
 
+    getOfficesByOffiProviderEmail(providerEmail){
+        return http.get(`/accounts/email/${providerEmail}/offices`)
+    }
+
     create(data) {
         return http.post("/offices", data);
     }
 
     update(id, data) {
-        return http.put(`/workspace/${id}`, data);
+        return http.put(`/offices/${id}`, data);
     }
 
     delete(id) {
-        return http.delete(`/workspace/${id}`);
+        return http.delete(`/offices/${id}`);
     }
 
     deleteAll() {

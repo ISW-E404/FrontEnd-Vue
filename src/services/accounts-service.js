@@ -2,7 +2,7 @@ import http from './http-common';
 
 
 class AccountService {
-    get() {
+    getAll() {
         return http.get(`/profile`);
     }
 
@@ -20,6 +20,10 @@ class AccountService {
 
     getUserData(id){
         return http.get(`/accounts/${id}`);
+    }
+
+    getUserByEmail(email){
+        return http.get(`/accounts/email/${email}`)
     }
 }
 

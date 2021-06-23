@@ -69,9 +69,14 @@ const routes = [
 
   },
   {
-    path: '/workplaces/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    path: '/myworkplaces/detail/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
     name: 'detail-office',
     component: () => import('../components/detail-office')
+  },
+  {
+    path: '/myworkplaces/edit/:officeId',
+    name: 'detail-office',
+    component: () => import(`../components/edit-office`)
   },
   {
     path: '/reservations',

@@ -13,7 +13,7 @@
     </v-card-title>
     <v-card-text>
       <v-data-table :headers="headers" :items="displayOffices" :items-per-page="5" :search="search"
-                    class="elevation-1" ref="officesTable" >
+                    class="elevation-1"  ref="tutorialsTable">
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="viewDetail(item.id)">mdi-magnify</v-icon>
           <v-icon small class="mr-2" @click="navigateToEditOffice(item.id)">mdi-pen</v-icon>
@@ -86,6 +86,7 @@
 <script>
 
 import OfficeService from '../services/offices-service'
+import AccountService from "../services/accounts-service";
 
 export default {
   name: "offices",
@@ -96,12 +97,12 @@ export default {
       dialogDelete: false,
       headers: [
         {text: 'Id', value: 'id'},
-        {text: 'Nombre', value: 'title'},
+        {text: 'Nombre', value: 'name'},
         {text: 'Dirección', value: 'address'},
         {text: 'Piso', value: 'floor'},
         {text: 'Capacidad', value: 'capacity'},
         {text: 'Precio', value: 'price'},
-        {text: 'Permite Recursos', value: 'allow_resources', sortable: false},
+        {text: 'Permite Recursos', value: 'allowResource', sortable: false},
         {text: 'Acciones', value: 'actions', sortable: false}
       ],
       offices: [],
@@ -127,12 +128,19 @@ export default {
         description: '',
         allow_resources: false
       },
+      provider: {}
     }
   },
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'Crear Oficina' : 'Editar Oficina'
     },
+
+    currentUser() {
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+    }
+
   },
 
   watch: {
@@ -145,28 +153,29 @@ export default {
   },
   methods: {
 
-    retrieveOffices() {
-      OfficeService.getAll()
-          .then(response => {
-            this.offices = response.data;
-            console.log(response.data)
-            this.displayOffices = response.data.map(this.getDisplayOffice);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+    retrieveOffices(){
+      OfficeService.getOfficesByOffiProvider(this.provider.id)
+        .then(response => {
+          this.offices = response.data;
+          console.log(response.data)
+          this.displayOffices = response.data.map(this.getDisplayOffice);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
     },
 
     getDisplayOffice(office) {
       return {
         id: office.id,
         address: office.address,
-        title: office.title,
+        name: office.name,
         capacity: office.capacity,
         floor: office.floor,
         price: office.price,
         description: office.description,
-        allow_resources: office.allow_resources ? "Permite" : "No permite",
+        allowResources: office.allowResource ? "Permite" : "No permite",
       };
     },
 
@@ -260,8 +269,26 @@ export default {
       this.$router.push({name: 'edit-office', params: { id: id}});
     }
   },
+
   mounted() {
-    this.retrieveOffices();
+    AccountService.getUserByEmail(this.currentUser.username)
+        .then(response => {
+          console.log(response.data);
+          this.provider = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+    OfficeService.getOfficesByOffiProviderEmail(this.currentUser.username)
+        .then(response => {
+          this.offices = response.data;
+          console.log(response.data)
+          this.displayOffices = response.data.map(this.getDisplayOffice);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
   }
 
 }
