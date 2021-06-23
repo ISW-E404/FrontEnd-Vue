@@ -13,25 +13,26 @@
       <v-toolbar-title>OffiRent</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
-        <v-btn depressed >
-          <router-link class="white--text" to="/">Home</router-link>
-        </v-btn>
-        <v-btn depressed>
-          <router-link class="white--text" to="/workplaces">Busqueda</router-link>
-        </v-btn>
-        <v-btn depressed>
-          <router-link class="white--text" to="/reservations">Reservas</router-link>
-        </v-btn>
-        <v-btn depressed>
-          <router-link class="white--text" to="/myworkplaces/">Mis Oficinas</router-link>
-        </v-btn>
-        <v-btn depressed>
-          <router-link class="white--text" to="/login">Luis</router-link>
-        </v-btn>
-        <v-btn depressed>
-          <router-link class="white--text" to="/profile">Perfil</router-link>
-        </v-btn>
+      <v-toolbar-items class="hidden-xs-only" >
+        <v-btn depressed class="white--text" to="/">Home</v-btn>
+        <v-btn depressed class="white--text" to="/workplaces">Busqueda</v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="hidden-xs-only" v-if="currentUser">
+        <v-btn depressed class="white--text" to="/reservations/">Reservas</v-btn>
+
+        <v-btn depressed class="white--text" to="/myworkplaces/">Mis Oficinas</v-btn>
+
+        <v-btn depressed class="white--text" to="/profile"  >{{ currentUser.username }}</v-btn>
+
+        <v-btn depressed class="white--text" @click.prevent="logout">Sign Out</v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="hidden-xs-only" v-else>
+        <v-btn depressed class="white--text" to="/register">Sign Up</v-btn>
+
+        <v-btn depressed class="white--text" to="/login">Sign in</v-btn>
+
       </v-toolbar-items>
     </v-app-bar>>
 
@@ -62,10 +63,20 @@ export default {
     // Head,
     Footer
   },
-
+  computed : {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
   data: () => ({
 
   }),
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 
