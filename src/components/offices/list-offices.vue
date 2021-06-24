@@ -10,13 +10,13 @@
         <v-layout row wrap>
           <v-flex xs12 sm4  class="mb-3" v-for="(office, index) in historyList" :key="index">
             <v-card max-width="400px">
-              <v-img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_898700298_2000131820009280352_424477.jpg"></v-img>
+              <v-img :src="office.image" contain></v-img>
               <v-card-title>{{office.title}}</v-card-title>
               <v-card-text>
                 <v-row align="center" class="mx-0">
-                  <v-rating :value="office.rating" color="amber" dense readonly size="14"></v-rating>
+                  <v-rating :value="office.score" color="amber" dense readonly size="14"></v-rating>
                   <div class="grey--text ml-4">
-                    {{office.rating}}
+                    {{office.score}}
                   </div>
                   <v-spacer/>
                   <div class="green--text">
@@ -25,11 +25,23 @@
                 </v-row>
               </v-card-text>
               <v-expand-transition>
-                <div v-show="office.status">
+                <div v-show="office.cardAction">
                   <v-divider></v-divider>
-
-                  <v-card-text>
+                  <v-card-subtitle class="pb-0">Descripcion</v-card-subtitle>
+                  <v-card-text class="text--primary">
                     {{office.description}}
+                  </v-card-text>
+                  <v-card-subtitle class="pb-0">Direccion</v-card-subtitle>
+                  <v-card-text class="text--primary">
+                    {{office.address}}
+                  </v-card-text>
+                  <v-card-subtitle class="pb-0">Pisos</v-card-subtitle>
+                  <v-card-text class="text--primary">
+                    {{office.floor}} planta(s)
+                  </v-card-text>
+                  <v-card-subtitle class="pb-0">Aforo</v-card-subtitle>
+                  <v-card-text class="text--primary">
+                    {{office.capacity}} personas
                   </v-card-text>
                 </div>
               </v-expand-transition>
@@ -44,9 +56,9 @@
                 <v-spacer></v-spacer>
                 <v-btn
                     icon
-                    @click="office.status = !office.status"
+                    @click="office.cardAction = !office.cardAction"
                 >
-                  <v-icon>{{ office.status ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                  <v-icon>{{ office.cardAction ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -59,13 +71,14 @@
 </template>
 
 <script>
+import OfficeService from "../../services/offices-service";
+
 export default {
 name: "list-offices",
   data () {
     return {
       page: 1,
       pageSize: 6,
-      show: false,
       offices: [
         {
           id:1,
@@ -179,24 +192,57 @@ name: "list-offices",
   },
   created() {
     let _this = this;
+    this.retrieveAllOffices();
     _this.initPage();
     _this.updatePage(_this.page);
+
+
   },
   methods: {
+
+    retrieveAllOffices() {
+      OfficeService.getAllOffices()
+          .then(response => {
+            this.offices = response.data;
+            console.log(response.data)
+            this.displayOffices = response.data.map(this.getDisplayOffice);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+
+    getDisplayOffice(office) {
+      return {
+        title: office.name,
+        image: office.image,
+        address: office.address,
+        floor: office.floor,
+        capacity: office.capacity,
+        allowResources: office.allowResource ? "Permite" : "No permite",
+        score: office.score,
+        description: office.description,
+        price: office.price,
+        status: office.status,
+        comment: office.comment,
+        cardAction: false
+      };
+    },
+
     initPage: function() {
       let _this = this;
       _this.listCount = _this.offices.length;
       if (_this.listCount < _this.pageSize) {
-        _this.historyList = _this.offices;
+        _this.historyList = _this.displayOffices;
       } else {
-        _this.historyList = _this.offices.slice(0, _this.pageSize);
+        _this.historyList = _this.displayOffices.slice(0, _this.pageSize);
       }
     },
     updatePage: function(pageIndex) {
       let _this = this;
       let _start = (pageIndex - 1) * _this.pageSize;
       let _end = pageIndex * _this.pageSize;
-      _this.historyList = _this.offices.slice(_start, _end);
+      _this.historyList = _this.displayOffices.slice(_start, _end);
       _this.page = pageIndex;
     },
     reserve() {
@@ -214,6 +260,10 @@ name: "list-offices",
       if (_this.pageSize == null || _this.listCount == null) return 0;
       return Math.ceil(_this.listCount / _this.pageSize);
     }
+  },
+
+  mounted() {
+    this.retrieveAllOffices();
   }
 }
 </script>

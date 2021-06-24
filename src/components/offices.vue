@@ -86,7 +86,6 @@
 <script>
 
 import OfficeService from '../services/offices-service'
-import AccountService from "../services/accounts-service";
 
 export default {
   name: "offices",
@@ -153,17 +152,16 @@ export default {
   },
   methods: {
 
-    retrieveOffices(){
-      OfficeService.getOfficesByOffiProvider(this.provider.id)
-        .then(response => {
-          this.offices = response.data;
-          console.log(response.data)
-          this.displayOffices = response.data.map(this.getDisplayOffice);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-
+    retrieveMyOffices(){
+      OfficeService.getOfficesByOffiProviderEmail(this.currentUser.username)
+          .then(response => {
+            this.offices = response.data;
+            console.log(response.data)
+            this.displayOffices = response.data.map(this.getDisplayOffice);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
     },
 
     getDisplayOffice(office) {
@@ -271,24 +269,8 @@ export default {
   },
 
   mounted() {
-    AccountService.getUserByEmail(this.currentUser.username)
-        .then(response => {
-          console.log(response.data);
-          this.provider = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      this.retrieveMyOffices();
 
-    OfficeService.getOfficesByOffiProviderEmail(this.currentUser.username)
-        .then(response => {
-          this.offices = response.data;
-          console.log(response.data)
-          this.displayOffices = response.data.map(this.getDisplayOffice);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
   }
 
 }

@@ -2,11 +2,11 @@ import http from './http-common';
 
 class OfficesService {
 
-    getAll() {
-        return http.get('/account/100/offices');
+    getAllOffices() {
+        return http.get('/offices');
     }
     get(id) {
-        return http.get(`/workspace/${id}`);
+        return http.get(`/offices/${id}`);
     }
 
     getOfficesByOffiProviderEmail(providerEmail){

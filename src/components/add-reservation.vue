@@ -55,7 +55,7 @@ export default {
       this.navigateToOffices();
     },
     navigateToOffices() {
-      this.$router.push({name: 'workspace'});
+      this.$router.push({name: 'workplaces'});
     }
   }
 }
