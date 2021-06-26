@@ -36,8 +36,13 @@
 </template>
 
 <script>
+import DistrictService from "../../services/district-service";
+//import ListOffices from "../offices/list-offices";
+
 export default {
 name: "search",
+  components:{
+  },
   data() {
     return{
       search: '',
@@ -140,6 +145,9 @@ name: "search",
         });
       },
       trackFilterDistrictAndTrackOptionalSearchDistrict(item){
+        DistrictService.getOfficesByDistric(item.title)
+        .then()
+
         this.trackOptionalSearchDistrict(item);
         this.trackFilterDistrict();
       }
