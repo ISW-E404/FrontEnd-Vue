@@ -7,7 +7,6 @@ import VueGtag from "vue-gtag";
 
 Vue.use(VueGtag, {
   config: { id: "G-LF9YDFLHL5" },
-  pageTrackerScreenviewEnabled: true,
 }, router);
 
 Vue.config.productionTip = false
