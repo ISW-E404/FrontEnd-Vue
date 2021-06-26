@@ -165,7 +165,7 @@ export default {
     },
 
     goBack() {
-      this.$router.push({name: 'workspace'});
+      this.$router.push({name: 'offices'});
     },
     mounted() {
       this.retrieveOffice();

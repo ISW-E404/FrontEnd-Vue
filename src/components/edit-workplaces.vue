@@ -139,7 +139,7 @@ export default {
       this.navigateToWorkplace();
     },
     navigateToWorkplace(){
-      this.$router.push({name: 'detail-workplace'})
+      this.$router.push({name: 'offices'})
     }
   }
 }

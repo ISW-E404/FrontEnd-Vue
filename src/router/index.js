@@ -59,11 +59,11 @@ const routes = [
   // },
   {
     path:'/myworkplaces/',
-    name: 'workspace',
+    name: 'offices',
     component: () => import('../components/offices')
   },
   {
-    path: '/workspace/new',
+    path: '/myworkplaces/new',
     name: 'add-office',
     component: () => import('../components/add-office')
 
@@ -75,7 +75,7 @@ const routes = [
   },
   {
     path: '/myworkplaces/edit/:officeId',
-    name: 'detail-office',
+    name: 'edit-office',
     component: () => import(`../components/edit-office`)
   },
   {

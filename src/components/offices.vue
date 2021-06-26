@@ -127,7 +127,7 @@ export default {
         description: '',
         allow_resources: false
       },
-      provider: {}
+
     }
   },
   computed: {
@@ -240,8 +240,8 @@ export default {
         OfficeService.create(this.editedItem)
             .then(response => {
               let item = response.data;
-              this.tutorials.push(item);
-              this.displayTutorials.push(this.getDisplayTutorial(item));
+              this.offices.push(item);
+              this.displayOffices.push(this.getDisplayOffice(item));
             })
             .catch(e => {
               console.log(e);
@@ -264,7 +264,7 @@ export default {
       this.$router.push({name: 'add-office'});
     },
     navigateToEditOffice(id) {
-      this.$router.push({name: 'edit-office', params: { id: id}});
+      this.$router.push({name: 'edit-workplaces', params: { id: id}});
     }
   },
 

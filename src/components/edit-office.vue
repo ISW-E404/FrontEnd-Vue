@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     retrieveOffices(id) {
-      OfficeService.get(id)
+      OfficeService.getViewProvider(id)
       .then((response) => {
         this.item = response.data;
       })
@@ -113,7 +113,7 @@ export default {
       this.navigateToOffices();
     },
     navigateToOffices() {
-      this.$router.push({name: 'workspace'});
+      this.$router.push({name: 'offices'});
     }
   },
   created() {
