@@ -43,6 +43,9 @@ export default {
 name: "search",
   components:{
   },
+  props:{
+    districts:[]
+  },
   data() {
     return{
       search: '',

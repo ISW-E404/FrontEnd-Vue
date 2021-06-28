@@ -71,128 +71,27 @@
 </template>
 
 <script>
-import OfficeService from "../../services/offices-service";
+//import OfficeService from "../../services/offices-service";
 
 export default {
 name: "list-offices",
+  props:{
+    offices: [
+    ],
+    displayOffices:[]
+  },
   data () {
     return {
       page: 1,
       pageSize: 6,
-      offices: [
-        {
-          id:1,
-          status: false,
-          title: "office 01",
-          price: 250,
-          rating: 4.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:2,
-          status: false,
-          title: "office 02",
-          price: 300,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:3,
-          status: false,
-          title: "office 03",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:4,
-          status: false,
-          title: "office 04",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:5,
-          status: false,
-          title: "office 05",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:6,
-          status: false,
-          title: "office 06",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:7,
-          status: false,
-          title: "office 07",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:8,
-          status: false,
-          title: "office 08",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:9,
-          status: false,
-          title: "office 09",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:10,
-          status: false,
-          title: "office 10",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:11,
-          status: false,
-          title: "office 11",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:12,
-          status: false,
-          title: "office 12",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:13,
-          status: false,
-          title: "office 13",
-          price: 305,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-      ],
+
       listCount: 0,
       historyList: [],
-      displayOffices:[]
+
     }
   },
   created() {
     let _this = this;
-    this.retrieveAllOffices();
     _this.initPage();
     _this.updatePage(_this.page);
 
@@ -200,34 +99,7 @@ name: "list-offices",
   },
   methods: {
 
-    retrieveAllOffices() {
-      OfficeService.getAllOffices()
-          .then(response => {
-            this.offices = response.data;
-            console.log(response.data)
-            this.displayOffices = response.data.map(this.getDisplayOffice);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-    },
 
-    getDisplayOffice(office) {
-      return {
-        title: office.name,
-        image: office.image,
-        address: office.address,
-        floor: office.floor,
-        capacity: office.capacity,
-        allowResources: office.allowResource ? "Permite" : "No permite",
-        score: office.score,
-        description: office.description,
-        price: office.price,
-        status: office.status,
-        comment: office.comment,
-        cardAction: false
-      };
-    },
 
     initPage: function() {
       let _this = this;
@@ -263,7 +135,7 @@ name: "list-offices",
   },
 
   mounted() {
-    this.retrieveAllOffices();
+
   }
 }
 </script>
