@@ -1,6 +1,6 @@
 <template>
   <v-app>
-
+    <script src="/__/firebase/8.6.5/firebase-performance.js"></script>
     <div>
       <v-content>
         <router-view/>
