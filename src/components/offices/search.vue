@@ -48,7 +48,6 @@ name: "search",
   components:{
   },
   props:{
-    districts:[],
     displayDistricts: [],
     prices: []
   },
@@ -56,7 +55,20 @@ name: "search",
     return{
       search: '',
       searchPrice:'',
-      itemsPrice: [
+      itemsPrice: [],
+      districts: [
+        {
+          id: 2, name: "Surco"
+        },
+        {
+          id: 1, name: "San Miguel"
+        },
+        {
+          id: 3, name: "Magdalena"
+        },
+        {
+          id: 4, name: "San Isidro"
+        }
       ]
     }
   },

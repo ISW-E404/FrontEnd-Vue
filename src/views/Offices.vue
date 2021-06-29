@@ -2,8 +2,8 @@
   <div class="offices">
     <v-row>
       <v-col sm="3" offset-lg="0" align-self="start">
-        <Search :districts="districts" :prices="prices"
-                @anyButtonDistrictPressed="filterOfficesByDistrict"
+        <Search  :prices="prices"
+                @anyButtonDistrictPressed="filterOfficesByDistrictId"
                 @buttonPricesPressed="filterOfficesByPricesRange"
                 @buttonAllDistrictsPressed="retrieveAllOffices"
                 @buttonAllPricesPressed="retrieveAllOffices"></Search>
@@ -19,7 +19,7 @@
 import Search from "../components/offices/search";
 import ListOffices from "../components/offices/list-offices";
 import OfficeService from "../services/offices-service";
-import DistrictService from "../services/district-service";
+//import DistrictService from "../services/district-service";
 export default {
 name: "Offices",
   data(){
@@ -202,17 +202,16 @@ name: "Offices",
       };
     },
 
-    retrieveAllDistricts (){
+    /*retrieveAllDistricts (){
       DistrictService.getAllDistricts()
           .then(response => {
             this.districts = response.data;
             console.log(response.data)
-            this.districtTitle = "todos los distritos";
           })
           .catch((e) => {
             console.log(e);
           });
-    },
+    },*/
 
 
     filterOfficesByPricesRange(item){
@@ -228,7 +227,7 @@ name: "Offices",
           });
     },
 
-    filterOfficesByDistrict(district) {
+    filterOfficesByDistrictId(district) {
       OfficeService.getAllOfficesByDistricId(district.id)
           .then(response => {
             this.offices = response.data;
@@ -244,7 +243,7 @@ name: "Offices",
   },
     mounted() {
       this.retrieveAllOfficesByDistrictSurco();
-      this.retrieveAllDistricts();
+      //this.retrieveAllDistricts();
     }
 }
 </script>
