@@ -9,8 +9,8 @@
         hide-details
     ></v-text-field>
     <v-list tile="prueba">
-      <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link @click="trackFilterDistrictAndTrackOptionalSearchDistrict(item.title)">
-        {{item.title}}
+      <v-list-item  v-for="item in districts" :key="item.name" :to="item.link" link @click="filterDistrict(item)">
+        {{item.name}}
       </v-list-item>
     </v-list>
 
@@ -24,8 +24,8 @@
           hide-details
       ></v-text-field>
       <v-list tile="prueba">
-        <v-list-item  v-for="item in itemsPrice" :key="item.title" :to="item.link" link @click="trackFilterPrices">
-          {{item.title}}
+        <v-list-item  v-for="item in prices" :key="item.title" :to="item.link" link @click="trackFilterPrices">
+          S/.{{item.minPrice}}.00 - S/.{{item.maxPrice}}.00
         </v-list-item>
       </v-list>
     </v-card>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import DistrictService from "../../services/district-service";
+//import DistrictService from "../../services/district-service";
 //import ListOffices from "../offices/list-offices";
 
 export default {
@@ -44,41 +44,15 @@ name: "search",
   components:{
   },
   props:{
-    districts:[]
+    districts:[],
+    displayDistricts: [],
+    prices: []
   },
   data() {
     return{
       search: '',
       searchPrice:'',
-      items: [
-
-        {
-          title: "Surco"
-        },
-        {
-          title: "San Miguel"
-        },
-        {
-          title: "Magdalena"
-        },
-        {
-          title: "San Isidro"
-        },
-      ],
       itemsPrice: [
-
-        {
-          title: "S/ 0.00 - S/ 100.00"
-        },
-        {
-          title: "S/ 100.00 - S/ 250.00"
-        },
-        {
-          title: "S/ 250.00 - S/ 500.00"
-        },
-        {
-          title: "S/ 500.00 - S/ 1000.00"
-        }
       ]
     }
   },
@@ -111,7 +85,7 @@ name: "search",
           'value': 1
         });
       },
-      trackOptionalSearchDistrict(item){
+      trackOptionalDistrict(item){
         switch (item){
           case "Surco":
             this.trackSurco();
@@ -147,12 +121,15 @@ name: "search",
           'value': 1
         });
       },
-      trackFilterDistrictAndTrackOptionalSearchDistrict(item){
-        DistrictService.getOfficesByDistric(item.title)
-        .then()
 
-        this.trackOptionalSearchDistrict(item);
-        this.trackFilterDistrict();
+      trackFilterDistrictAndOptionalDistrict(item){
+        this.trackOptionalDistrict(item.name);
+        this.trackFilterDistrict(item.name);
+      },
+
+      filterDistrict(item) {
+        this.trackFilterDistrictAndOptionalDistrict(item);
+        this.$emit('anyButtonDistrictPressed', item)
       }
 
   }

@@ -5,12 +5,20 @@ class OfficesService {
     getAllOffices() {
         return http.get('/offices');
     }
+
+    getAllOfficesByDistricId(districtId) {
+        return http.get(`/districts/${districtId}/offices`);
+    }
     get(id) {
         return http.get(`/offices/${id}`);
     }
 
     getOfficesByOffiProviderEmail(providerEmail){
         return http.get(`/accounts/email/${providerEmail}/offices`)
+    }
+
+    getOfficesByPricesRange(minPrice, maxPrice){
+        return http.get(`/offices/minPrice/${minPrice}/maxPrice/${maxPrice}`)
     }
 
     create(data) {

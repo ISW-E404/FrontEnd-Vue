@@ -2,7 +2,7 @@
   <div class="offices">
     <v-row>
       <v-col sm="3" offset-lg="0" align-self="start">
-        <Search></Search>
+        <Search :districts="districts" :prices="prices" @anyButtonDistrictPressed="filterOfficesByDistrict"></Search>
       </v-col>
       <v-col sm="9"  offset-lg="0">
         <ListOffices :offices="offices" :display-offices="displayOffices"></ListOffices>
@@ -15,6 +15,7 @@
 import Search from "../components/offices/search";
 import ListOffices from "../components/offices/list-offices";
 import OfficeService from "../services/offices-service";
+import DistrictService from "../services/district-service";
 export default {
 name: "Offices",
   data(){
@@ -125,7 +126,28 @@ name: "Offices",
           description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
         },
       ],
-      displayOffices:[]
+      displayOffices:[],
+      districts: [
+        {id: '', name: ''},
+      ],
+      prices: [
+        {
+          minPrice: 0.00,
+          maxPrice: 100.00
+        },
+        {
+          minPrice: 100.00,
+          maxPrice: 250.00
+        },
+        {
+          minPrice: 250.00,
+          maxPrice: 500.00
+        },
+        {
+          minPrice: 500.00,
+          maxPrice: 1000.00
+        }
+      ]
     }
   },
   components: {
@@ -160,10 +182,33 @@ name: "Offices",
         comment: office.comment,
         cardAction: false
       };
+    },
+
+    retrieveAllDistricts (){
+      DistrictService.getAllDistricts()
+          .then(response => {
+            this.districts = response.data;
+            console.log(response.data)
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+    filterOfficesByDistrict(district) {
+      OfficeService.getAllOfficesByDistricId(district.id)
+          .then(response => {
+            this.offices = response.data;
+            console.log(response.data)
+            this.displayOffices = response.data.map(this.getDisplayOffice);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
     }
   },
     mounted() {
       this.retrieveAllOffices();
+      this.retrieveAllDistricts();
     }
 }
 </script>
