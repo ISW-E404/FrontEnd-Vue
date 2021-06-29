@@ -4,10 +4,12 @@
       <v-col sm="3" offset-lg="0" align-self="start">
         <Search :districts="districts" :prices="prices"
                 @anyButtonDistrictPressed="filterOfficesByDistrict"
-                @buttonPricesPressed="filterOfficesByPricesRange"></Search>
+                @buttonPricesPressed="filterOfficesByPricesRange"
+                @buttonAllDistrictsPressed="retrieveAllOffices"
+                @buttonAllPricesPressed="retrieveAllOffices"></Search>
       </v-col>
       <v-col sm="9"  offset-lg="0">
-        <ListOffices :offices="offices" :display-offices="displayOffices"></ListOffices>
+        <ListOffices :offices="offices" :display-offices="displayOffices" :principal-office-title="districtTitle" ></ListOffices>
       </v-col>
     </v-row>
   </div>
@@ -132,6 +134,7 @@ name: "Offices",
       districts: [
         {id: '', name: ''},
       ],
+      districtTitle:'',
       prices: [
         {
           minPrice: 0.00,
@@ -163,12 +166,25 @@ name: "Offices",
             this.offices = response.data;
             console.log(response.data)
             this.displayOffices = response.data.map(this.getDisplayOffice);
+            this.districtTitle = "todos los distritos";
           })
           .catch((e) => {
             console.log(e);
           });
     },
 
+    retrieveAllOfficesByDistrictSurco() {
+      OfficeService.getAllOfficesByDistricId("2")
+          .then(response => {
+            this.offices = response.data;
+            console.log(response.data)
+            this.displayOffices = response.data.map(this.getDisplayOffice);
+            this.districtTitle = "Surco";
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
     getDisplayOffice(office) {
       return {
         title: office.name,
@@ -191,10 +207,11 @@ name: "Offices",
           .then(response => {
             this.districts = response.data;
             console.log(response.data)
+            this.districtTitle = "todos los distritos";
           })
           .catch((e) => {
             console.log(e);
-          }); 
+          });
     },
 
 
@@ -204,6 +221,7 @@ name: "Offices",
             this.offices = response.data;
             console.log(response.data)
             this.displayOffices = response.data.map(this.getDisplayOffice);
+            this.districtTitle = "todos los distritos";
           })
           .catch((e) => {
             console.log(e);
@@ -216,14 +234,16 @@ name: "Offices",
             this.offices = response.data;
             console.log(response.data)
             this.displayOffices = response.data.map(this.getDisplayOffice);
+            this.districtTitle = district.name;
           })
           .catch((e) => {
             console.log(e);
           });
+
     }
   },
     mounted() {
-      this.retrieveAllOffices();
+      this.retrieveAllOfficesByDistrictSurco();
       this.retrieveAllDistricts();
     }
 }

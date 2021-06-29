@@ -3,30 +3,34 @@
     <v-spacer></v-spacer>
     <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
+        append-icon="mdi-map-marker-multiple"
         label="Buscar distrito"
         single-line
         hide-details
-    ></v-text-field>
+    ></v-text-field> <!-- propiedad de este tag comentada: append-icon="mdi-magnify" -->
     <v-list tile="prueba">
+
       <v-list-item  v-for="item in districts" :key="item.name" :to="item.link" link @click="filterDistrict(item)">
         {{item.name}}
       </v-list-item>
+      <v-list-item link @click="filterAllDistricts">Todos los distritos</v-list-item>
     </v-list>
 
     <v-card>
       <v-spacer></v-spacer>
       <v-text-field
           v-model="searchPrice"
-          append-icon="mdi-magnify"
+          append-icon="mdi-currency-usd"
           label="Buscar por precio"
           single-line
           hide-details
-      ></v-text-field>
+      ></v-text-field> <!-- propiedad de este tag comentada: append-icon="mdi-magnify" -->
       <v-list tile="prueba">
+
         <v-list-item  v-for="item in prices" :key="item.title" :to="item.link" link @click="filterPrices(item)">
           S/.{{item.minPrice}}.00 - S/.{{item.maxPrice}}.00
         </v-list-item>
+        <v-list-item link @click="filterAllPrices">Todos los precios</v-list-item>
       </v-list>
     </v-card>
   </v-card>
@@ -107,6 +111,8 @@ name: "search",
             break;
         }
       },
+
+
       trackFilterDistrict(){
         this.$gtag.event("district-filter-select", {
           'event_category': "General filters for offices",
@@ -122,6 +128,9 @@ name: "search",
         });
       },
 
+
+
+
       trackFilterDistrictAndOptionalDistrict(item){
         this.trackOptionalDistrict(item.name);
         this.trackFilterDistrict(item.name);
@@ -132,9 +141,21 @@ name: "search",
         this.$emit('anyButtonDistrictPressed', item)
       },
 
+
+
+
+
       filterPrices(item){
         this.trackFilterPrices();
         this.$emit('buttonPricesPressed', item)
+      },
+      filterAllDistricts(){
+        this.trackFilterDistrict();
+        this.$emit('buttonAllDistrictsPressed')
+      },
+      filterAllPrices(){
+      this.trackFilterPrices();
+      this.$emit('buttonAllPricesPressed')
       }
 
   }
