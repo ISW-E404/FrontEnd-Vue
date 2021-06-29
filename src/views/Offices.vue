@@ -194,7 +194,7 @@ name: "Offices",
           })
           .catch((e) => {
             console.log(e);
-          });
+          }); 
     },
 
 
