@@ -10,7 +10,7 @@
         <v-layout row wrap>
           <v-flex xs12 sm4  class="mb-3" v-for="(office, index) in offices" :key="index">
             <v-card max-width="400px">
-              <v-img :src="office.image" contain></v-img>
+              <v-img :src="office.image"  aspect-ratio="1.6" contain></v-img>
               <v-card-title>{{office.name}}</v-card-title>
               <v-card-text>
                 <v-row align="center" class="mx-0">
