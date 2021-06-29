@@ -19,7 +19,7 @@
 import Search from "../components/offices/search";
 import ListOffices from "../components/offices/list-offices";
 import OfficeService from "../services/offices-service";
-//import DistrictService from "../services/district-service";
+import DistrictService from "../services/district-service";
 export default {
 name: "Offices",
   data(){
@@ -173,6 +173,7 @@ name: "Offices",
           });
     },
 
+    //funcion de vistas inicial de oficians en surco
     retrieveAllOfficesByDistrictSurco() {
       OfficeService.getAllOfficesByDistricId("2")
           .then(response => {
@@ -202,7 +203,7 @@ name: "Offices",
       };
     },
 
-    /*retrieveAllDistricts (){
+    retrieveAllDistricts (){
       DistrictService.getAllDistricts()
           .then(response => {
             this.districts = response.data;
@@ -211,7 +212,7 @@ name: "Offices",
           .catch((e) => {
             console.log(e);
           });
-    },*/
+    },
 
 
     filterOfficesByPricesRange(item){
@@ -242,8 +243,9 @@ name: "Offices",
     }
   },
     mounted() {
-      this.retrieveAllOfficesByDistrictSurco();
-      //this.retrieveAllDistricts();
+      //this.retrieveAllOfficesByDistrictSurco();
+      this.retrieveAllOffices();
+      this.retrieveAllDistricts();
     }
 }
 </script>
