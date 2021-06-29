@@ -2,7 +2,9 @@
   <div class="offices">
     <v-row>
       <v-col sm="3" offset-lg="0" align-self="start">
-        <Search :districts="districts" :prices="prices" @anyButtonDistrictPressed="filterOfficesByDistrict"></Search>
+        <Search :districts="districts" :prices="prices"
+                @anyButtonDistrictPressed="filterOfficesByDistrict"
+                @buttonPricesPressed="filterOfficesByPricesRange"></Search>
       </v-col>
       <v-col sm="9"  offset-lg="0">
         <ListOffices :offices="offices" :display-offices="displayOffices"></ListOffices>
@@ -194,6 +196,20 @@ name: "Offices",
             console.log(e);
           });
     },
+
+
+    filterOfficesByPricesRange(item){
+      OfficeService.getOfficesByPricesRange(item.minPrice, item.maxPrice)
+          .then(response => {
+            this.offices = response.data;
+            console.log(response.data)
+            this.displayOffices = response.data.map(this.getDisplayOffice);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+
     filterOfficesByDistrict(district) {
       OfficeService.getAllOfficesByDistricId(district.id)
           .then(response => {

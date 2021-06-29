@@ -24,7 +24,7 @@
           hide-details
       ></v-text-field>
       <v-list tile="prueba">
-        <v-list-item  v-for="item in prices" :key="item.title" :to="item.link" link @click="trackFilterPrices">
+        <v-list-item  v-for="item in prices" :key="item.title" :to="item.link" link @click="filterPrices(item)">
           S/.{{item.minPrice}}.00 - S/.{{item.maxPrice}}.00
         </v-list-item>
       </v-list>
@@ -130,6 +130,11 @@ name: "search",
       filterDistrict(item) {
         this.trackFilterDistrictAndOptionalDistrict(item);
         this.$emit('anyButtonDistrictPressed', item)
+      },
+
+      filterPrices(item){
+        this.trackFilterPrices();
+        this.$emit('buttonPricesPressed', item)
       }
 
   }
