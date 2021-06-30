@@ -53,7 +53,7 @@
               </div>
             </v-col>
             <v-col cols="12" sm="4">
-              <v-btn href="https://s-o-s-ideas.github.io/LandingPage-Offi-Rent-Web/" target="_blank" class="about_btn">Conoce más sobre nosotros</v-btn>
+              <v-btn href="https://isw-e404.github.io/Landing-Page.github.io/" target="_blank" class="about_btn">Conoce más sobre nosotros</v-btn>
             </v-col>
           </v-row>
         </v-card-text>
