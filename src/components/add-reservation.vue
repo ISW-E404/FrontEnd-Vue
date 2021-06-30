@@ -25,6 +25,7 @@
 
 <script>
 import ReservationsService from "../services/reservations-service";
+import AccountService from "../services/accounts-service";
 
 export default {
   name: "add-reservation",
@@ -39,6 +40,12 @@ export default {
       },
     }
   },
+  computed: {
+    currentUser() {
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+      }
+    },
   methods: {
 
     ExecuteReservation() {
@@ -57,7 +64,23 @@ export default {
     navigateToOffices() {
       this.$router.push({name: 'workplaces'});
     }
+  },
+  mounted() {
+    if (!this.currentUser) {
+      this.$router.push('/login');
+    }
+    AccountService.getUserByEmail(this.currentUser.username)
+        .then(response => {
+          console.log(response.data);
+          this.profile = response.data;
+          this.displayProfile = response.data.map(this.getDisplayProfile);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
   }
+
+
 }
 </script>
 
